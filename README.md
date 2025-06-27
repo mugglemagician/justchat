@@ -25,12 +25,8 @@ JustChat generates images using AI from the textual prompt.
 
 ### Quiz Master
 
-You can provide it with a topic.
+You can provide it with a topic and JustChat will start taking your quiz on that particular topic.
 
 ![Quiz1](/images/quiz.png)
-
-JustChat will start taking your quiz on that particular topic.
-
-![Quiz1](/images/quiz2.png)
 
 There are many more services provided which can be selected from the Dock, e.g. Code-Explainer, Email-Generator and a Friend to talk to.
