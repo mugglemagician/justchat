@@ -1,36 +1,36 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# JustChat
 
-## Getting Started
+## Your AI Friend
 
-First, run the development server:
+### Sign-up Page
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+The username, email and encrypted password is saved in the database.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+![signup page](/images/signin.png)
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### ChatBot
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+The chat is saved in database for each user to ensure privacy, which is loaded once the app is logged in with that particular email. The chats can be cleared with the clear button.
 
-## Learn More
+![ChatBot](/images/chatbot.png)
 
-To learn more about Next.js, take a look at the following resources:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Services Provided
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### Text-to-Image
 
-## Deploy on Vercel
+JustChat generates images using AI from the textual prompt.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+![Text2Image](/images/T2I.png)
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+### Quiz Master
+
+You can provide it with a topic.
+
+![Quiz1](/images/quiz.png)
+
+JustChat will start taking your quiz on that particular topic.
+
+![Quiz1](/images/quiz2.png)
+
+There are many more services provided which can be selected from the Dock, e.g. Code-Explainer, Email-Generator and a Friend to talk to.
