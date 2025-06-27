@@ -5,6 +5,7 @@ import React, { useEffect, useState } from 'react'
 import Message from './Message';
 import { useTask } from '@/Contexts/TaskContext';
 import { ClimbingBoxLoader } from 'react-spinners';
+import { getMessages } from '@/actions/userActions';
 
 export default function ChatWindow() {
 
@@ -15,9 +16,10 @@ export default function ChatWindow() {
     useEffect(() => {
         setMessages([]);
         setIsLoading(true);
-        setTimeout(() => {
-            setIsLoading(false);
-        }, 1000);
+        getMessages(task)
+            .then(res => setMessages(JSON.parse(res.payload || "[]")))
+            .catch(() => alert("Something Went Wrong !"))
+            .finally(() => setIsLoading(false));
     }, [task]);
 
     return (

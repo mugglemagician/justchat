@@ -4,7 +4,7 @@ import React, { useState } from 'react'
 import AutoResizeTextarea from './TextArea'
 import { Eraser, SendHorizonal } from 'lucide-react'
 import { useMessages } from '@/Contexts/MessagesContext';
-import { sendMessage } from '@/actions/userActions';
+import { clearChat, sendMessage } from '@/actions/userActions';
 import { MessageType } from '@/types/general';
 import { ClipLoader } from 'react-spinners';
 import { useTask } from '@/Contexts/TaskContext';
@@ -52,7 +52,13 @@ export default function TextBar() {
     }
 
     const handleClearChat = async () => {
-
+        const res = await clearChat(task);
+        if (res.success) {
+            setMessages([]);
+        }
+        else {
+            alert("Something Went Wrong !");
+        }
     }
 
     return (

@@ -4,3 +4,9 @@ export interface MessageType {
 }
 
 export type TaskType = "CHAT" | "IMAGE" | "CODE" | "QUIZ" | "EMAIL";
+
+export type SessionType = {
+    id: string,
+    username: string,
+    email: string
+};

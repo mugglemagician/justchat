@@ -8,6 +8,13 @@ export function getServerActionObjectWithPayload(success: boolean, payload: stri
     };
 }
 
+export function getServerActionObjectWithoutPayload(success: boolean) {
+    return {
+        success
+    };
+}
+
+
 
 export function getSystemPrompt(task: TaskType): string {
     switch (task) {

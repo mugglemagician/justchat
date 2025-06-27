@@ -12,10 +12,11 @@ export async function POST(req: Request) {
     if (!user) return NextResponse.json({ error: "Invalid credentials" }, { status: 401 });
     const isMatch = await bcrypt.compare(password, user.password);
     if (!isMatch) return NextResponse.json({ error: "Invalid Credentials !" }, { status: 401 });
-    const token = signToken({ id: user._id, email: user.email });
+    const token = signToken({ id: user._id, name: user.name, email: user.email });
+    console.log(token);
     const serialized = serialize("auth_token", token, {
         httpOnly: true,
-        secure: true,
+        secure: process.env.NODE_ENV === "production",
         sameSite: "lax",
         path: "/",
         maxAge: 60 * 60 * 24 * 7,

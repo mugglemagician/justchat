@@ -2,12 +2,21 @@
 
 import React from 'react'
 import { SmartDock, SmartDockItemProps } from './SmartDock'
-import { ALargeSmall, Brain, Code, Image, Keyboard, LogIn, Mail, UsersRound } from 'lucide-react'
+import { ALargeSmall, Brain, Code, Image, Keyboard, LogIn, LogOut, Mail, UsersRound } from 'lucide-react'
 import { useTask } from '@/Contexts/TaskContext';
+import { useRouter } from 'next/navigation';
 
 export default function DockContainer() {
 
     const { task, setTask } = useTask();
+    const router = useRouter();
+
+    const handleLogout = async () => {
+        await fetch('/api/auth/logout', {
+            method: "POST"
+        });
+        router.push('/auth');
+    }
 
     const dockItems: SmartDockItemProps[] = [{
         icon: <ALargeSmall className={`${task === "CHAT" ? "text-white" : "text-white/60"} cursor-pointer`} />,
@@ -35,8 +44,9 @@ export default function DockContainer() {
         onClick: () => setTask("EMAIL")
     },
     {
-        icon: <LogIn className='text-white cursor-pointer' />,
-        label: "Login"
+        icon: <LogOut className='text-white cursor-pointer' />,
+        label: "Logout",
+        onClick: handleLogout
     }];
 
     return (

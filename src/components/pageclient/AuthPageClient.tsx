@@ -3,7 +3,8 @@
 import { useState } from "react";
 import FloatingLabelInput from "../FloatingLabelInput";
 import { LogIn, UserPlus } from "lucide-react";
-import { redirect } from "next/navigation";
+import { SyncLoader } from "react-spinners";
+import { useRouter } from "next/navigation";
 
 export default function AuthPageClient() {
 
@@ -13,10 +14,11 @@ export default function AuthPageClient() {
 
     const [isLogginIn, setIsLogginIn] = useState<boolean>(true);
     const [isLoading, setIsLoading] = useState<boolean>(false);
+    const router = useRouter();
 
     const handleAuth = async () => {
         if (isLoading) return;
-        if (username === "" || email === "" || password === "") return;
+        if (email === "" || password === "" || (username === "" && !isLogginIn)) return;
         setIsLoading(true);
         try {
             if (isLogginIn) {
@@ -25,7 +27,7 @@ export default function AuthPageClient() {
                     headers: {
                         'Content-Type': 'application/json'
                     },
-                    body: JSON.stringify({ username, email, password })
+                    body: JSON.stringify({ email, password })
                 });
                 const data = await res.json();
                 if (!data.user) throw new Error();
@@ -36,13 +38,13 @@ export default function AuthPageClient() {
                     headers: {
                         'Content-Type': 'application/json'
                     },
-                    body: JSON.stringify({ email, password })
+                    body: JSON.stringify({ username, email, password })
                 });
                 const data = await res.json();
                 if (!data.user) throw new Error();
             }
 
-            return redirect('/');
+            return router.push('/');
 
         }
         catch {
@@ -54,7 +56,10 @@ export default function AuthPageClient() {
 
 
     return (
-        <main className='flex-grow flex justify-center items-center'>
+        <main className='flex-grow flex flex-col gap-11 justify-center items-center'>
+            <h1 className="text-white font-extrabold text-4xl">
+                JustChat
+            </h1>
             <form onSubmit={e => e.preventDefault()} className="max-w-fit mx-auto flex flex-col justify-center items-center gap-6">
 
                 {
@@ -85,13 +90,15 @@ export default function AuthPageClient() {
                     onClick={handleAuth}
                     className="font-extrabold h-[3em] transition-all hover:-translate-y-0.5 hover:brightness-110 duration-200 inline-flex justify-center items-center gap-3 rounded-xl bg-gradient-to-r from-cyan-400 to-cyan-600 w-full cursor-pointer">
                     {
-                        isLogginIn ?
-                            <>
-                                <LogIn className="w-5 h-5" /> Login
-                            </> :
-                            <>
-                                <UserPlus className="w-5 h-5" /> Register
-                            </>
+                        isLoading ? <SyncLoader /> : (
+                            isLogginIn ?
+                                <>
+                                    <LogIn className="w-5 h-5" /> Login
+                                </> :
+                                <>
+                                    <UserPlus className="w-5 h-5" /> Register
+                                </>
+                        )
                     }
                 </button>
 
