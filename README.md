@@ -1,32 +1,36 @@
-# JustChat
+This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
-## Your AI Friend
+## Getting Started
 
-### Sign-up Page
+First, run the development server:
 
-The username, email and encrypted password is saved in the database.
+```bash
+npm run dev
+# or
+yarn dev
+# or
+pnpm dev
+# or
+bun dev
+```
 
-![signup page](/images/signin.png)
+Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-### ChatBot
+You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
 
-The chat is saved in database for each user to ensure privacy, which is loaded once the app is logged in with that particular email. The chats can be cleared with the clear button.
+This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
 
-![ChatBot](/images/chatbot.png)
+## Learn More
 
+To learn more about Next.js, take a look at the following resources:
 
-## Services Provided
+- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
+- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
 
-### Text-to-Image
+You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
 
-JustChat generates images using AI from the textual prompt.
+## Deploy on Vercel
 
-![Text2Image](/images/T2I.png)
+The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
-### Quiz Master
-
-You can provide it with a topic and JustChat will start taking your quiz on that particular topic.
-
-![Quiz](/images/quiz.png)
-
-There are many more services provided which can be selected from the Dock, e.g. Code-Explainer, Email-Generator and a Friend to talk to.
+Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
