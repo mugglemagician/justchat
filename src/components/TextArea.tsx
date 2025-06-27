@@ -80,7 +80,7 @@ const AutoResizeTextarea: React.FC<AutoResizeTextareaProps> = ({
             onChange={handleInput}
             onInput={handleInput}
             placeholder={placeholder}
-            className={`w-full max-w-xl outline-none font-bold bg-white/10 backdrop-blur-md border-white/10 shadow-2xl shadow-black/10 rounded-md px-3 py-3 resize-none overflow-hidden ${className}`}
+            className={`w-full max-w-xl text-xs sm:text-[1em] lg:text-lg outline-none font-bold bg-white/10 backdrop-blur-md border-white/10 shadow-2xl shadow-black/10 rounded-md px-3 py-3 resize-none overflow-hidden ${className}`}
             rows={minRows}
             style={{ ...style, height: undefined }}
             {...rest}

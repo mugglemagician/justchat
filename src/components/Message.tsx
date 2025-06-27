@@ -20,8 +20,8 @@ export default function Message({ message }: PropType) {
                         <Image src={message.text} alt="" width={1920} height={1080} className="rounded-xl" />
                     </div>
                     :
-                    <div className={`text-white font-semibold text-xl ${message.author === "USER" && 'max-w-[60%]'} ${message.author === "USER" ? "place-self-end" : "place-self-start"}`}>
-                        <p className={`${message.author === "USER" && 'bg-gray-700 p-4'} break-all rounded-xl`}>
+                    <div className={`text-white font-semibold text-md sm:text-xl whitespace-pre-wrap ${message.author === "USER" && 'max-w-[80%] sm:max-w-[60%]'} ${message.author === "USER" ? "place-self-end" : "place-self-start"}`}>
+                        <p className={`${message.author === "USER" && 'bg-gray-700 p-4'} rounded-xl`}>
                             {message.text}
                         </p>
                         <CopyButton text={message.text} styles={message.author === "USER" ? 'ml-auto' : 'mr-auto'} />

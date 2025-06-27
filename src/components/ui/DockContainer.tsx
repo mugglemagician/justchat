@@ -1,15 +1,19 @@
 "use client";
 
-import React from 'react'
+import React, { useState } from 'react'
 import { SmartDock, SmartDockItemProps } from './SmartDock'
-import { ALargeSmall, Brain, Code, Image, Keyboard, LogIn, LogOut, Mail, UsersRound } from 'lucide-react'
+import { ALargeSmall, Brain, Code, Image as ImageIcon, LogOut, Mail, Menu, X } from 'lucide-react'
 import { useTask } from '@/Contexts/TaskContext';
 import { useRouter } from 'next/navigation';
+import Image from "next/image";
+import Link from 'next/link';
 
 export default function DockContainer() {
 
     const { task, setTask } = useTask();
     const router = useRouter();
+
+    const [isMenuShowing, setIsMenuShowing] = useState<boolean>(false);
 
     const handleLogout = async () => {
         await fetch('/api/auth/logout', {
@@ -24,7 +28,7 @@ export default function DockContainer() {
         onClick: () => setTask("CHAT")
     },
     {
-        icon: <Image className={`${task === "IMAGE" ? "text-white" : "text-white/60"} cursor-pointer`} />,
+        icon: <ImageIcon className={`${task === "IMAGE" ? "text-white" : "text-white/60"} cursor-pointer`} />,
         label: "Text To Image",
         onClick: () => setTask("IMAGE")
     },
@@ -50,8 +54,19 @@ export default function DockContainer() {
     }];
 
     return (
-        <div className='w-full mx-auto'>
-            <SmartDock items={dockItems} hoverStyle='float' variant='glass' className='max-w-fit' />
-        </div>
+        <div className='w-full px-4 py-2 bg-gradient-to-r flex justify-center items-center'>
+            <Link href={'/'} className="w-[50px] h-[50px]">
+                <Image src={'/justchat.png'} alt="" width={512} height={512} className="w-full h-full" />
+            </Link>
+            {
+                isMenuShowing ?
+                    <X className='text-white cursor-pointer w-9 h-9 ml-auto sm:hidden' onClick={() => setIsMenuShowing(false)} />
+                    :
+                    <Menu className='text-white w-9 h-9 cursor-pointer ml-auto sm:hidden' onClick={() => setIsMenuShowing(true)} />
+
+            }
+
+            <SmartDock items={dockItems} hoverStyle='float' variant='glass' smallClassName={`${isMenuShowing ? 'right-2' : 'right-[-100px]'}`} />
+        </div >
     )
 }

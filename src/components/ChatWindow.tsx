@@ -23,7 +23,7 @@ export default function ChatWindow() {
     }, [task]);
 
     return (
-        <section className='flex-grow my-6 py-2 overflow-auto flex'>
+        <section className='flex-grow my-6 py-2 overflow-auto flex px-6 sm:px-11'>
             <section className={`w-full max-w-5xl mx-auto flex flex-grow flex-col ${isLoading ? 'justify-center' : 'justify-start'} items-center gap-11`}>
 
                 {

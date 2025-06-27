@@ -5,7 +5,7 @@ import DockContainer from "../ui/DockContainer";
 
 export default function HomePageClient() {
     return (
-        <main className="flex-grow flex flex-col py-2">
+        <main className="flex-grow flex flex-col pb-2">
             <DockContainer />
             <ChatWindow />
             <TextBar />

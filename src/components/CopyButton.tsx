@@ -21,7 +21,7 @@ export default function CopyButton({ text, styles = 'ml-auto' }: PropType) {
 
     return (
         <button className={`${styles} mt-2 block cursor-pointer`} onClick={copyText}>
-            {copied ? <CopyCheck className='w-5 h-5' /> : <Copy className='w-5 h-5' />}
+            {copied ? <CopyCheck className='w-4 h-4 sm:w-5 sm:h-5' /> : <Copy className='w-4 h-4 sm:w-5 sm:h-5' />}
 
         </button>
     )

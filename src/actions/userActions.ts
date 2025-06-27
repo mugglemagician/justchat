@@ -30,12 +30,11 @@ export async function sendMessage(message: MessageType, task: TaskType) {
 
     try {
         await mongooseConnect();
-        Message.create({ ...message, task, userId: user.id })
         const systemPrompt = getSystemPrompt(task);
         if (task !== "IMAGE") {
-            const res = await gemini.models.generateContent({
+
+            const chat = gemini.chats.create({
                 model: process.env.GEMINI_TEXT_MODEL!,
-                contents: message.text,
                 config: {
                     thinkingConfig: {
                         thinkingBudget: 0
@@ -44,15 +43,27 @@ export async function sendMessage(message: MessageType, task: TaskType) {
                 }
             });
 
+            const messages = await Message.find({ task, userId: user.id }).sort({ createdAt: 1 }).lean() as unknown as MessageDocument[];
+            for (const message of messages) {
+                if (message.author === "SYSTEM") continue;
+                await chat.sendMessage({
+                    message: message.text
+                });
+            }
+
+            const res = await chat.sendMessage({ message: message.text });
+
             const sysMessage: MessageType = {
                 text: res.text || "Something Went Wrong !",
                 author: "SYSTEM"
             };
 
+            await Message.create({ ...message, task, userId: user.id });
             await Message.create({ ...sysMessage, task, userId: user.id });
             return getServerActionObjectWithPayload(true, res.text || "Something Went Wrong !");
         }
 
+        await Message.create({ ...message, task, userId: user.id });
         // Set responseModalities to include "Image" so the model can generate  an image
         const res = await gemini.models.generateContent({
             model: process.env.GEMINI_IMAGE_MODEL!,

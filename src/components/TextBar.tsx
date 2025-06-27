@@ -21,7 +21,7 @@ export default function TextBar() {
 
         if (userMessage.trim() === "") return;
 
-        if (isSending) return;
+        if (isSending || isClearing) return;
         setIsSending(true);
 
         const message: MessageType = {
@@ -52,6 +52,8 @@ export default function TextBar() {
     }
 
     const handleClearChat = async () => {
+        if (isSending || isClearing) return;
+        setIsClearing(true);
         const res = await clearChat(task);
         if (res.success) {
             setMessages([]);
@@ -59,10 +61,11 @@ export default function TextBar() {
         else {
             alert("Something Went Wrong !");
         }
+        setIsClearing(false);
     }
 
     return (
-        <form onSubmit={e => e.preventDefault()} className='text-white pb-2 flex justify-center items-center gap-4 w-full'>
+        <form onSubmit={e => e.preventDefault()} className='text-white pb-2 px-3 sm:px-6 flex justify-center items-center gap-4 w-full'>
             <AutoResizeTextarea
                 value={userMessage}
                 onChange={e => setUserMessage(userMessage === "" && e.target.value === " " ? "" : e.target.value)}
@@ -73,11 +76,11 @@ export default function TextBar() {
                     }
                 }} />
             <button className='cursor-pointer' onClick={handleSend}>
-                {isSending ? <ClipLoader color='white' size={'25px'} /> : <SendHorizonal className='w-[25px] h-[25px]' />}
+                {isSending ? <ClipLoader color='white' size={'25px'} /> : <SendHorizonal className='w-[20px] h-[20px] sm:w-[25px] sm:h-[25px]' />}
             </button>
 
             <button type='button' className='cursor-pointer' onClick={handleClearChat}>
-                {isClearing ? <ClipLoader color='white' size={'25px'} /> : <Eraser className='w-[25px] h-[25px]' />}
+                {isClearing ? <ClipLoader color='white' size={'25px'} /> : <Eraser className='w-[20px] h-[20px] sm:w-[25px] sm:h-[25px]' />}
             </button>
         </form>
     )

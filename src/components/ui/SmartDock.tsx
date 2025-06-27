@@ -345,6 +345,7 @@ export interface SmartDockProps extends MotionDivProps {
     items: SmartDockItemProps[];
     variant?: DockVariant;
     hoverStyle?: HoverStyle;
+    smallClassName?: string,
 }
 
 function SmartDockItem({
@@ -442,7 +443,7 @@ function SmartDockItem({
 
 const SmartDock = React.forwardRef<HTMLDivElement, SmartDockProps>(
     (
-        { className, items, variant = "modern", hoverStyle = "default", ...props },
+        { className, smallClassName, items, variant = "modern", hoverStyle = "default", ...props },
         ref,
     ) => {
         const mouseLeft = useMotionValue(-Infinity);
@@ -493,10 +494,10 @@ const SmartDock = React.forwardRef<HTMLDivElement, SmartDockProps>(
                     ))}
                 </motion.div>
 
-                <div className="sm:hidden">
+                <div className={`sm:hidden transition-all duration-200 top-20 fixed max-w-fit mx-auto ${smallClassName}`}>
                     <div
                         className={cn(
-                            "mx-auto flex h-20 max-w-full items-end gap-4 overflow-x-scroll rounded-2xl px-4 pb-3",
+                            "mx-auto flex flex-col max-w-full items-end justify-center gap-4 overflow-x-scroll rounded-2xl px-4 py-3",
                             variantStyles[variant],
                         )}
                     >
@@ -504,9 +505,10 @@ const SmartDock = React.forwardRef<HTMLDivElement, SmartDockProps>(
                             <div
                                 key={i}
                                 className={cn(
-                                    "flex aspect-square w-12 shrink-0 items-center justify-center rounded-xl",
+                                    "flex aspect-square w-10 shrink-0 items-center justify-center rounded-xl",
                                     itemVariantStyles[variant],
                                 )}
+                                onClick={item.onClick}
                             >
                                 {item.icon}
                             </div>

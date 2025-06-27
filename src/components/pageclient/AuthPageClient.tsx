@@ -5,6 +5,7 @@ import FloatingLabelInput from "../FloatingLabelInput";
 import { LogIn, UserPlus } from "lucide-react";
 import { SyncLoader } from "react-spinners";
 import { useRouter } from "next/navigation";
+import Image from "next/image";
 
 export default function AuthPageClient() {
 
@@ -57,10 +58,17 @@ export default function AuthPageClient() {
 
     return (
         <main className='flex-grow flex flex-col gap-11 justify-center items-center'>
-            <h1 className="text-white font-extrabold text-4xl">
-                JustChat
-            </h1>
-            <form onSubmit={e => e.preventDefault()} className="max-w-fit mx-auto flex flex-col justify-center items-center gap-6">
+            <div className="flex justify-center items-center gap-4">
+                <div className="w-11 h-11">
+                    <Image src={'/justchat.png'} alt="" width={512} height={512} className="w-full h-full" />
+                </div>
+
+                <h1 className="text-white font-extrabold text-4xl">
+                    JustChat
+                </h1>
+            </div>
+
+            <form onSubmit={e => e.preventDefault()} className="max-w-fit shadow-2xl mx-auto flex flex-col justify-center items-center gap-6">
 
                 {
                     !isLogginIn &&
