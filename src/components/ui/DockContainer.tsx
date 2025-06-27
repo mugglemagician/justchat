@@ -7,13 +7,19 @@ import { useTask } from '@/Contexts/TaskContext';
 import { useRouter } from 'next/navigation';
 import Image from "next/image";
 import Link from 'next/link';
+import { TaskType } from '@/types/general';
 
 export default function DockContainer() {
 
-    const { task, setTask } = useTask();
+    const { task, setTask, setIsReady } = useTask();
     const router = useRouter();
 
     const [isMenuShowing, setIsMenuShowing] = useState<boolean>(false);
+
+    const handleTaskChange = (task: TaskType) => {
+        setIsReady(false);
+        setTask(task);
+    }
 
     const handleLogout = async () => {
         await fetch('/api/auth/logout', {
@@ -25,27 +31,27 @@ export default function DockContainer() {
     const dockItems: SmartDockItemProps[] = [{
         icon: <ALargeSmall className={`${task === "CHAT" ? "text-white" : "text-white/60"} cursor-pointer`} />,
         label: "General Chat",
-        onClick: () => setTask("CHAT")
+        onClick: () => handleTaskChange("CHAT")
     },
     {
         icon: <ImageIcon className={`${task === "IMAGE" ? "text-white" : "text-white/60"} cursor-pointer`} />,
         label: "Text To Image",
-        onClick: () => setTask("IMAGE")
+        onClick: () => handleTaskChange("IMAGE")
     },
     {
         icon: <Code className={`${task === "CODE" ? "text-white" : "text-white/60"} cursor-pointer`} />,
         label: "Code Explainer",
-        onClick: () => setTask("CODE")
+        onClick: () => handleTaskChange("CODE")
     },
     {
         icon: <Brain className={`${task === "QUIZ" ? "text-white" : "text-white/60"} cursor-pointer`} />,
         label: "Quiz Mentor",
-        onClick: () => setTask("QUIZ")
+        onClick: () => handleTaskChange("QUIZ")
     },
     {
         icon: <Mail className={`${task === "EMAIL" ? "text-white" : "text-white/60"} cursor-pointer`} />,
         label: "Email Generator",
-        onClick: () => setTask("EMAIL")
+        onClick: () => handleTaskChange("EMAIL")
     },
     {
         icon: <LogOut className='text-white cursor-pointer' />,

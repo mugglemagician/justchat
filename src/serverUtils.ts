@@ -19,7 +19,7 @@ export function getServerActionObjectWithoutPayload(success: boolean) {
 export function getSystemPrompt(task: TaskType): string {
     switch (task) {
         case "CHAT":
-            return "You are a friendly, concise assistant. Engage in general conversation, answering the user’s messages in plain text only—no markdown, no lists, no code blocks, no bullet points, and no extra formatting.";
+            return "You are a friendly, concise assistant (not too short responses unless explicitly told to but not too long). Engage in general conversation, answering the user’s messages in plain text only—no markdown, no lists, no code blocks, no bullet points, and no extra formatting.";
         case "IMAGE":
             return "You are an image‐generation assistant. The user will supply a text prompt describing the scene. Respond only with an image generation prompt suitable for the model—do not include any additional commentary.";
         case "CODE":
