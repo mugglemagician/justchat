@@ -81,7 +81,6 @@ export async function sendMessage(message: MessageType, task: TaskType) {
                 if (!imageData) throw new Error();
                 const buffer = Buffer.from(imageData, "base64");
                 const uploadRes = await uploadImage(buffer);
-                console.log("Image saved to cloudinary");
                 const sysMessage: MessageType = {
                     text: uploadRes.payload || "",
                     author: "SYSTEM"
@@ -108,7 +107,6 @@ export async function getMessages(task: TaskType) {
     try {
         await mongooseConnect();
         const messages = await Message.find({ task, userId: user.id }).sort({ createdAt: 1 }).lean() as unknown as MessageDocument[];
-        console.log(messages);
         return getServerActionObjectWithPayload(true, JSON.stringify(messages));
     }
     catch {

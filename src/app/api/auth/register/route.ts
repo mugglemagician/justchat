@@ -7,7 +7,6 @@ import { NextResponse } from "next/server";
 
 export async function POST(req: Request) {
     await mongooseConnect();
-    console.log(req);
     const { name, email, password } = await req.json();
     const existing = await User.findOne({ email }).lean() as UserDocument | null;
     if (existing) return NextResponse.json({ error: "Email already used" }, { status: 400 });

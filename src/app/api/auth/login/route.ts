@@ -13,7 +13,6 @@ export async function POST(req: Request) {
     const isMatch = await bcrypt.compare(password, user.password);
     if (!isMatch) return NextResponse.json({ error: "Invalid Credentials !" }, { status: 401 });
     const token = signToken({ id: user._id, name: user.name, email: user.email });
-    console.log(token);
     const serialized = serialize("auth_token", token, {
         httpOnly: true,
         secure: process.env.NODE_ENV === "production",
